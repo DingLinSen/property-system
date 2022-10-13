@@ -1,5 +1,12 @@
 import { login, logout, getInfo } from "@/api/user";
-import { getToken, setToken, removeToken,setUserId } from "@/utils/auth";
+import {
+  getToken,
+  setToken,
+  removeToken,
+  setUserId,
+  getUserId,
+  removeUserId,
+} from "@/utils/auth";
 import { resetRouter } from "@/router";
 
 const getDefaultState = () => {
@@ -7,7 +14,7 @@ const getDefaultState = () => {
     token: getToken(),
     name: "",
     avatar: "",
-    userId:""
+    userId: getUserId(),
   };
 };
 
@@ -46,7 +53,7 @@ const actions = {
           commit("SET_TOKEN", data.token);
           commit("SET_USER_ID", data.userId);
           setToken(data.token);
-          setUserId(data.userId)
+          setUserId(data.userId);
           resolve();
         })
         .catch((error) => {
@@ -84,6 +91,7 @@ const actions = {
       logout(state.token)
         .then(() => {
           removeToken(); // must remove  token  first
+          removeUserId();
           resetRouter();
           commit("RESET_STATE");
           resolve();

@@ -52,7 +52,7 @@ export const constantRoutes = [
         path: "dashboard",
         name: "Dashboard",
         component: () => import("@/views/dashboard/index"),
-        meta: { title: "首页", icon: "dashboard" },
+        meta: { title: "首页", icon: "dashboard", affix: true },
       },
     ],
   },
@@ -81,6 +81,18 @@ export const constantRoutes = [
         name: "sysPermissionList",
         component: () => import("@/views/system/sysPermissionList"),
         meta: { title: "权限管理", icon: "tree" },
+      },
+    ],
+  },
+
+  {
+    path: "/redirect",
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: "/redirect/:path(.*)",
+        component: () => import("../views/redirect"),
       },
     ],
   },

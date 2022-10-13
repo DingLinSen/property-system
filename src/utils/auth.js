@@ -2,6 +2,7 @@ import Cookies from 'js-cookie'
 
 const TokenKey = 'vue_admin_template_token'
 const UserIdKey = 'userId'
+const TagsViewKey = 'tagsView'
 
 export function getToken() {
   return Cookies.get(TokenKey)
@@ -25,4 +26,16 @@ export function removeUserId() {
 
 export function removeToken() {
   return Cookies.remove(TokenKey)
+}
+
+export function setTags(tags){
+  sessionStorage.setItem(TagsViewKey,JSON.stringify(tags))
+}
+
+export function getTags(){
+  return JSON.parse(sessionStorage.getItem(TagsViewKey)) || []
+}
+
+export function clearTags(){
+  sessionStorage.clear()
 }
